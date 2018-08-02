@@ -1481,14 +1481,9 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _Notification = __webpack_require__(1);
-
-var _Notification2 = _interopRequireDefault(_Notification);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+/*:: import type { Notification, NotificationProps } from 'types/Notification';*/
 function doNotify(notification /*: Notification*/, notificationProps /*: NotificationProps*/) {
   return {
     type: ACTIONS.CREATE_NOTIFICATION,
@@ -4093,11 +4088,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var DEFAULTSEARCHRESULTSIZE = 10; // @flow
 
 var DEFAULTSEARCHRESULTFROM = 0;
-
-var doSearch = exports.doSearch = function doSearch(rawQuery) {
-  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
-  var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
-  return function (dispatch, getState) {
+/*:: type Dispatch = (action: any) => any;*/
+/*:: type GetState = () => {};*/
+var doSearch = exports.doSearch = function doSearch(rawQuery /*: string*/) {
+  var size /*: number*/ = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
+  var from /*: number*/ = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
+  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
     var state = getState();
     var query = rawQuery.replace(/^lbry:\/\//i, '');
 
@@ -4157,7 +4153,7 @@ var doSearch = exports.doSearch = function doSearch(rawQuery) {
 };
 
 var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSuggestions(value /*: string*/) {
-  return function (dispatch) {
+  return function (dispatch /*: Dispatch*/) {
     var query = value.trim();
 
     var isPrefix = function isPrefix() {
@@ -4263,7 +4259,7 @@ var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSugg
 };
 
 var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQuery(query /*: string*/, shouldSkipSuggestions /*: ?boolean*/) {
-  return function (dispatch) {
+  return function (dispatch /*: Dispatch*/) {
     dispatch({
       type: ACTIONS.UPDATE_SEARCH_QUERY,
       data: { query: query }
@@ -4277,7 +4273,7 @@ var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQ
 };
 
 var doFocusSearchInput = exports.doFocusSearchInput = function doFocusSearchInput() {
-  return function (dispatch) {
+  return function (dispatch /*: Dispatch*/) {
     return dispatch({
       type: ACTIONS.SEARCH_FOCUS
     });
@@ -4285,7 +4281,7 @@ var doFocusSearchInput = exports.doFocusSearchInput = function doFocusSearchInpu
 };
 
 var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput() {
-  return function (dispatch) {
+  return function (dispatch /*: Dispatch*/) {
     return dispatch({
       type: ACTIONS.SEARCH_BLUR
     });
@@ -6295,8 +6291,8 @@ reducers[ACTIONS.WALLET_LOCK_FAILED] = function (state /*: WalletState*/, action
 };
 
 function walletReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-  var action = arguments[1];
+  var state /*: WalletState*/ = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action /*: ActionResult*/ = arguments[1];
 
   var handler = reducers[action.type];
   if (handler) return handler(state, action);
